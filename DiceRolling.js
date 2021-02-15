@@ -26,6 +26,7 @@ const DICE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)[^\\d]+(\\d*)');
 const DICE_SINGLE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)');
 
 function gotMessage(msg) {
+	console.log('--------------------------------------');
 	console.log(__filename, { msg });
 
 	//Quirk-A-Bot reads every message in the Discord server (but not in a creepy way)
