@@ -20,14 +20,19 @@ client.on('message', gotMessage);
 
 // __________________________________________________________________________
 //matches Roll and it's easiest typos followed by two numbers, sperating all three parts by anything other than digits (e.g. roll532 makes no sense, but RoL5 2 does)
-const DICE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)[^\\d]+(\\d*)');
+// const DICE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)[^\\d]+(\\d*)');
+const DICE_ROLL_REGEX = /r+o+l+\D*\d+\D+\d*/i;
 
 // matches a single number rolled (to be just clean dice)
+// const DICE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)[^\\d]+(\\d*)');
 const DICE_SINGLE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)');
 
 function gotMessage(msg) {
 	console.log('--------------------------------------');
-	console.log(__filename, { msg });
+	// console.log(__filename, { msg });
+
+	// ignore messages from a bot
+	if (msg.author.bot) return;
 
 	//Quirk-A-Bot reads every message in the Discord server (but not in a creepy way)
 	if (msg.channel.id == process.env.DICE_ROLLING_CHANNEL) {
