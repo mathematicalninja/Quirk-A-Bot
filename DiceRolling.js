@@ -23,43 +23,39 @@ client.on('message', gotMessage);
 // const DICE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)[^\\d]+(\\d*)');
 const DICE_ROLL_REGEX = /r+o+l+\D*(\d+)\D*(\d*)/i;
 
+// not required
 // matches a single number rolled (to be just clean dice)
 // const DICE_SINGLE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)');
-const DICE_SINGLE_ROLL_REGEX = /r+o+l+\D*(\d+)/i;
+// const DICE_SINGLE_ROLL_REGEX = /r+o+l+\D*(\d+)/i;
 
 function gotMessage(msg) {
 	// ignore messages from a bot
 	if (msg.author.bot) return;
 
 	// Quirk-A-Bot reads every message in the Discord server (but not in a creepy way)
-	// ignore messages not from dice rolling channel
+	// ignore messages not from Dice Rolling channel
 	if (msg.channel.id !== process.env.DICE_ROLLING_CHANNEL) return;
 
-	console.log('--------------------------------------');
-	// console.log(__filename, { msg });
+	// parse non-bot messages in Dice Rolling channel
 
-	// Dice Rolling channel
-
-	// Add in a roll 3d10 style roller (with multi support "roll 3d4, 2d6")
+	// Handle message requesting hungry and/or Clean Dice rolls
 	if (msg.content.match(DICE_ROLL_REGEX)) {
-		// Hungry Dice and Clean
-		console.log('Hungry Dice and Clean', { DICE_ROLL_REGEX });
+		// Add in a roll 3d10 style roller (with multi support "roll 3d4, 2d6")
 		const playerDice = regexToDice(msg.content.match(DICE_ROLL_REGEX));
 		msg.reply(doTheRolling(playerDice));
 	}
 }
 
 function regexToDice(RegexMatch) {
-	console.log('regexToDice', { RegexMatch });
-	// turns the regex's text into js integers
+	// turns the regex's text into js integers, defaults to 0 if hunger dice not defined
 	return [parseInt(RegexMatch[1]), parseInt(RegexMatch[2]) || 0];
 }
 
 function doTheRolling(playerDice) {
 	// The wrapper function to do the actuall rolling
 	//respec to "vampireRolling" when other rolls are implemented
-	const DICE = kindOfDice(playerDice[0], playerDice[1]);
-	const RESULTS = rollDice(DICE[0], DICE[1]);
+	const [cleanDice, hungerDice] = kindOfDice(playerDice[0], playerDice[1]);
+	const RESULTS = rollDice(cleanDice, hungerDice);
 	const WHAT_TO_WRITE = showRolls(RESULTS);
 	return WHAT_TO_WRITE;
 }
@@ -71,9 +67,9 @@ function rollAd10() {
 function kindOfDice(A, B) {
 	// takes in a pool and hunger dice (in any order) and returns the clean and hungry dice numbers
 	let pool = Math.max(A, B);
-	let hunger = Math.min(A, B);
-	let cleanDice = pool - hunger;
-	return [cleanDice, hunger];
+	let hungerDice = Math.min(A, B);
+	let cleanDice = pool - hungerDice;
+	return [cleanDice, hungerDice];
 }
 
 function rollDice(cleanDice, hungryDice) {
@@ -91,34 +87,34 @@ function rollDice(cleanDice, hungryDice) {
 	return [cleanResults, hungryResults];
 }
 
-function showRolls(Results) {
+function showRolls([cleanResults, hungryResults]) {
 	// respec to Vampire something when the distinction matters.
-	// console.log(Results)
+	// console.log(Results) 
 
 	let cleanString = '';
 	let hungryString = '';
 
-	if (!(Results[0][0] == undefined)) {
+	if (!(cleanResults[0] == undefined)) {
 		//Checks if the clean result's first element defined
 
-		let Len = Results[0].length; //number of Clean Dice results
+		let Len = cleanResults.length; //number of Clean Dice results
 		cleanString = 'Clean Dice: ';
 
-		for (let i in Results[0]) {
+		for (let i in cleanResults) {
 			if (i != Len - 1) {
 				// this isn't the final of the clean dice
-				cleanString += Results[0][i].toString() + ', ';
+				cleanString += cleanResults[i].toString() + ', ';
 			} else {
-				cleanString += Results[0][i].toString();
+				cleanString += cleanResults[i].toString();
 				// last entry doen't end in a comma and a space
 			}
 		}
 	}
 
-	if (!(Results[1][0] == undefined)) {
+	if (!(hungryResults[0] == undefined)) {
 		//Checks if the hungry result's first element defined
 
-		let Len = Results[1].length;
+		let Len = hungryResults.length;
 		console.log(Len);
 
 		if (cleanString != '') {
@@ -127,17 +123,17 @@ function showRolls(Results) {
 		} else {
 			hungryString = 'Hungry Dice: ';
 		}
-		for (let i in Results[1]) {
+		for (let i in hungryResults) {
 			if (i != Len - 1) {
 				// this isn't the final of the hungry dice
-				hungryString += Results[1][i].toString() + ', ';
+				hungryString += hungryResults[i].toString() + ', ';
 			} else {
 				// last entry doen't end in a comma and a space
-				hungryString += Results[1][i].toString();
+				hungryString += hungryResults[i].toString();
 			}
 		}
 	}
-	if (Results[0].length + Results[1].length == 0) {
+	if (cleanResults.length + hungryResults.length == 0) {
 		//nothing was rolled
 		return 'please be sensible.';
 	}
