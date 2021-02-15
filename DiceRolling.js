@@ -19,15 +19,13 @@ client.on('ready', () => {
 client.on('message', gotMessage);
 
 // __________________________________________________________________________
-//matches Roll and it's easiest typos followed by two numbers, sperating all three parts by anything other than digits (e.g. roll532 makes no sense, but RoL5 2 does)
-// const DICE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)[^\\d]+(\\d*)');
+//matches Roll and it's easiest typos followed by two numbers, sperating all three parts by anything other than digits (e.g. roll532 makes no sense, but RoL5 2 does) Matches a one or two numbers, if the second number exists
 const DICE_ROLL_REGEX = /r+o+l+\D*(\d+)\D*(\d*)/i;
 
-// not required
-// matches a single number rolled (to be just clean dice)
-// const DICE_SINGLE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)');
-// const DICE_SINGLE_ROLL_REGEX = /r+o+l+\D*(\d+)/i;
-
+/**
+ * Discord message handler
+ * @param {Object} msg Discord message object 
+ */
 function gotMessage(msg) {
 	// ignore messages from a bot
 	if (msg.author.bot) return;
@@ -46,13 +44,22 @@ function gotMessage(msg) {
 	}
 }
 
+/**
+ * Turns the regex's text into js integers, defaults to 0 if hunger dice not defined
+ * @param {Array<number>} RegexMatch result of regex, including capture groups
+ * @returns the first and/or second number if defined (otherwise defaults to 0)
+ */
 function regexToDice(RegexMatch) {
-	// turns the regex's text into js integers, defaults to 0 if hunger dice not defined
+	// 
 	return [parseInt(RegexMatch[1]), parseInt(RegexMatch[2]) || 0];
 }
 
-function doTheRolling(playerDice) {
-	// The wrapper function to do the actuall rolling
+/**
+ * The wrapper function to do the actuall rolling
+ * @param {Array<number>} playerDice array of numbers from the user
+ * @returns {string} Message tooutput
+ */
+function doTheRolling(playerDice) { 
 	//respec to "vampireRolling" when other rolls are implemented
 	const [cleanDiceCount, hungerDiceCount] = kindOfDice(playerDice);
 	const RESULTS = [rollDice(cleanDiceCount), rollDice(hungerDiceCount)];
@@ -60,29 +67,43 @@ function doTheRolling(playerDice) {
 	return WHAT_TO_WRITE;
 }
 
+/**
+ * Rolls a ten sided dice and returns an integer of the result
+ * @returns {number} result of dice roll
+ */
 function rollAd10() {
 	return 1 + Math.floor(Math.random() * 10);
 }
 
+/**
+ * Takes in a pool and hunger dice (in any order) and returns the clean and hungry dice numbers
+ * @param {Array<number>} input the input numbers to parse
+ * @returns {Array<number>} a number array tuple of [cleanDice, hungerDice]
+ */
 function kindOfDice([A, B]) {
-	// takes in a pool and hunger dice (in any order) and returns the clean and hungry dice numbers
 	let pool = Math.max(A, B);
 	let hungerDice = Math.min(A, B);
 	let cleanDice = pool - hungerDice;
 	return [cleanDice, hungerDice];
 }
 
+/**
+ * Rolls a specified number of dice
+ * @param {number} diceCount the number of dice to roll
+ * @returns {Array<number>} the resulting dice rolls
+ */
 function rollDice(diceCount) {
-	// Rolls clean and Hungry dice, returning an array of two arrays ([[Clean], [Hungry]])
 	let results = [];
 
-	for (let i = 0; i < diceCount; i++) {
-		results.push(rollAd10());
-	}
+	// roll number of dice based on dice count
+	for (let i = 0; i < diceCount; i++) results.push(rollAd10());
 
 	return results;
 }
 
+/**
+ * Produces a description of roll results
+ */
 function showRolls([cleanResults, hungryResults]) {
 	// respec to Vampire something when the distinction matters.
 	// console.log(Results)
