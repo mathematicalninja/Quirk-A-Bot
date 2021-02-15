@@ -54,7 +54,7 @@ function regexToDice(RegexMatch) {
 function doTheRolling(playerDice) {
 	// The wrapper function to do the actuall rolling
 	//respec to "vampireRolling" when other rolls are implemented
-	const [cleanDice, hungerDice] = kindOfDice(playerDice[0], playerDice[1]);
+	const [cleanDice, hungerDice] = kindOfDice(playerDice);
 	const RESULTS = rollDice(cleanDice, hungerDice);
 	const WHAT_TO_WRITE = showRolls(RESULTS);
 	return WHAT_TO_WRITE;
@@ -64,7 +64,7 @@ function rollAd10() {
 	return 1 + Math.floor(Math.random() * 10);
 }
 
-function kindOfDice(A, B) {
+function kindOfDice([A, B]) {
 	// takes in a pool and hunger dice (in any order) and returns the clean and hungry dice numbers
 	let pool = Math.max(A, B);
 	let hungerDice = Math.min(A, B);
@@ -76,20 +76,20 @@ function rollDice(cleanDice, hungryDice) {
 	// Rolls clean and Hungry dice, returning an array of two arrays ([[Clean], [Hungry]])
 	let cleanResults = [];
 	let hungryResults = [];
-
+ 
 	for (let i = 0; i < cleanDice; i++) {
 		cleanResults.push(rollAd10());
 	}
 	for (let i = 0; i < hungryDice; i++) {
 		hungryResults.push(rollAd10());
-	}
+	} 
 
 	return [cleanResults, hungryResults];
 }
 
 function showRolls([cleanResults, hungryResults]) {
 	// respec to Vampire something when the distinction matters.
-	// console.log(Results) 
+	// console.log(Results)
 
 	let cleanString = '';
 	let hungryString = '';
