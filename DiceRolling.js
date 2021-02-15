@@ -4,7 +4,7 @@ const client = new Discord.Client();
 
 // Setting the .env file to a locally accessible form
 require('dotenv').config();
-const Enviromet = require('dotenv').config();
+// const Enviromet = require('dotenv').config();
 
 // logging in as a bot
 client.login(process.env.DISCORD_BOT_TOKEN);
@@ -13,7 +13,7 @@ client.login(process.env.DISCORD_BOT_TOKEN);
 console.log('Hello');
 
 client.on('ready', () => {
-	console.log('loged on ok');
+	console.log('logged on ok');
 });
 
 client.on('message', gotMessage);
