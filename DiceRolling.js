@@ -88,35 +88,17 @@ function showRolls([cleanResults, hungryResults]) {
 	// console.log(Results)
 
 	// prevent unecessary work if nothing was rolled
-	if (cleanResults.length + hungryResults.length == 0) {
-		//nothing was rolled
-		return 'please be sensible.';
-	}
+	if (cleanResults.length + hungryResults.length == 0) return 'please be sensible.';
 
 	let cleanString = '';
 	let hungryString = '';
 
-	if (!(cleanResults[0] == undefined)) {
-		//Checks if the clean result's first element defined
+	//Add clean result text if there are any clean dice
+	if (cleanResults.length) cleanString = `Clean Dice: ${cleanResults.join(', ')}`;
 
-		// let Len = cleanResults.length; //number of Clean Dice results
-		cleanString = 'Clean Dice: ' + cleanResults.join(', '); 
-	}
-
-	if (!(hungryResults[0] == undefined)) {
-		//Checks if the hungry result's first element defined
-
-		let Len = hungryResults.length;
-		console.log(Len);
-
-		if (cleanString != '') {
-			//if there are clean dice, newline before the Hungry dice
-			hungryString = '\nHungry Dice: ';
-		} else {
-			hungryString = 'Hungry Dice: ';
-		}
-		hungryString += hungryResults.join(', '); 
-	}
+	//Add hungry result text if there are any hungry dice
+	//if there are clean dice, newline before the Hungry dice
+	if (hungryResults.length) hungryString = `${cleanString ? '\n' : ''}Hungry Dice: ${hungryResults.join(', ')}`;
 
 	return cleanString + hungryString;
 }
