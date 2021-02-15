@@ -87,24 +87,20 @@ function showRolls([cleanResults, hungryResults]) {
 	// respec to Vampire something when the distinction matters.
 	// console.log(Results)
 
+	// prevent unecessary work if nothing was rolled
+	if (cleanResults.length + hungryResults.length == 0) {
+		//nothing was rolled
+		return 'please be sensible.';
+	}
+
 	let cleanString = '';
 	let hungryString = '';
 
 	if (!(cleanResults[0] == undefined)) {
 		//Checks if the clean result's first element defined
 
-		let Len = cleanResults.length; //number of Clean Dice results
-		cleanString = 'Clean Dice: ';
-
-		for (let i in cleanResults) {
-			if (i != Len - 1) {
-				// this isn't the final of the clean dice
-				cleanString += cleanResults[i].toString() + ', ';
-			} else {
-				cleanString += cleanResults[i].toString();
-				// last entry doen't end in a comma and a space
-			}
-		}
+		// let Len = cleanResults.length; //number of Clean Dice results
+		cleanString = 'Clean Dice: ' + cleanResults.join(', '); 
 	}
 
 	if (!(hungryResults[0] == undefined)) {
@@ -119,19 +115,8 @@ function showRolls([cleanResults, hungryResults]) {
 		} else {
 			hungryString = 'Hungry Dice: ';
 		}
-		for (let i in hungryResults) {
-			if (i != Len - 1) {
-				// this isn't the final of the hungry dice
-				hungryString += hungryResults[i].toString() + ', ';
-			} else {
-				// last entry doen't end in a comma and a space
-				hungryString += hungryResults[i].toString();
-			}
-		}
+		hungryString += hungryResults.join(', '); 
 	}
-	if (cleanResults.length + hungryResults.length == 0) {
-		//nothing was rolled
-		return 'please be sensible.';
-	}
+
 	return cleanString + hungryString;
 }
