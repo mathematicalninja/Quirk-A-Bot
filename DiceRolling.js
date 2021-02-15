@@ -21,46 +21,38 @@ client.on('message', gotMessage);
 // __________________________________________________________________________
 //matches Roll and it's easiest typos followed by two numbers, sperating all three parts by anything other than digits (e.g. roll532 makes no sense, but RoL5 2 does)
 // const DICE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)[^\\d]+(\\d*)');
-const DICE_ROLL_REGEX = /r+o+l+\D*\d+\D+\d*/i;
+const DICE_ROLL_REGEX = /r+o+l+\D*(\d+)\D*(\d*)/i;
 
 // matches a single number rolled (to be just clean dice)
-// const DICE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)[^\\d]+(\\d*)');
-const DICE_SINGLE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)');
+// const DICE_SINGLE_ROLL_REGEX = new RegExp('[Rr]+[oO]+[lL]+[^\\d]*(\\d+)');
+const DICE_SINGLE_ROLL_REGEX = /r+o+l+\D*(\d+)/i;
 
 function gotMessage(msg) {
-	console.log('--------------------------------------');
-	// console.log(__filename, { msg });
-
 	// ignore messages from a bot
 	if (msg.author.bot) return;
 
-	//Quirk-A-Bot reads every message in the Discord server (but not in a creepy way)
-	if (msg.channel.id == process.env.DICE_ROLLING_CHANNEL) {
-		//Dice Rolling channel
+	// Quirk-A-Bot reads every message in the Discord server (but not in a creepy way)
+	// ignore messages not from dice rolling channel
+	if (msg.channel.id !== process.env.DICE_ROLLING_CHANNEL) return;
 
-		// Add in a roll 3d10 style roller (with multi support "roll 3d4, 2d6")
+	console.log('--------------------------------------');
+	// console.log(__filename, { msg });
 
-		if (msg.content.match(DICE_ROLL_REGEX)) {
-			//Hungry Dice and Clean
-			let playerDice = regexToDice(msg.content.match(DICE_ROLL_REGEX));
-			msg.reply(doTheRolling(playerDice));
-		} else if (msg.content.match(DICE_SINGLE_ROLL_REGEX)) {
-			//Just Clean Dice
-			let RegexMatch = msg.content.match(DICE_SINGLE_ROLL_REGEX);
-			let playerDice = hungryToClean(RegexMatch);
-			msg.reply(doTheRolling(playerDice));
-		}
+	// Dice Rolling channel
+
+	// Add in a roll 3d10 style roller (with multi support "roll 3d4, 2d6")
+	if (msg.content.match(DICE_ROLL_REGEX)) {
+		// Hungry Dice and Clean
+		console.log('Hungry Dice and Clean', { DICE_ROLL_REGEX });
+		const playerDice = regexToDice(msg.content.match(DICE_ROLL_REGEX));
+		msg.reply(doTheRolling(playerDice));
 	}
 }
 
 function regexToDice(RegexMatch) {
+	console.log('regexToDice', { RegexMatch });
 	// turns the regex's text into js integers
-	return [parseInt(RegexMatch[1]), parseInt(RegexMatch[2])];
-}
-
-function hungryToClean(RegexMatch) {
-	//turns the regex's text into a js integer and says there's no Hungry dice
-	return [parseInt(RegexMatch[1]), 0];
+	return [parseInt(RegexMatch[1]), parseInt(RegexMatch[2]) || 0];
 }
 
 function doTheRolling(playerDice) {
