@@ -3,8 +3,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 // Setting the .env file to a locally accessible form
-require('dotenv').config();
-// const Enviromet = require('dotenv').config();
+require('dotenv').config(); 
 
 // logging in as a bot
 client.login(process.env.DISCORD_BOT_TOKEN);
@@ -105,8 +104,7 @@ function rollDice(diceCount) {
  * Produces a description of roll results
  */
 function showRolls([cleanResults, hungryResults]) {
-	// respec to Vampire something when the distinction matters.
-	// console.log(Results)
+	// respec to Vampire something when the distinction matters. 
 
 	// prevent unecessary work if nothing was rolled
 	if (cleanResults.length + hungryResults.length == 0) return 'please be sensible.';
