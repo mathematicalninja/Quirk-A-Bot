@@ -4,12 +4,17 @@
   "description": "",
   "main": "DiceRolling.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node DiceRolling.js",
+    "dev": "nodemon DiceRolling.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
