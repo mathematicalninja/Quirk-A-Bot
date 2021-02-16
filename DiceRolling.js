@@ -11,9 +11,10 @@ client.login(process.env.DISCORD_BOT_TOKEN);
 // Hello ^-^
 console.log('Hello');
 
-client.on('ready', () => {
-	console.log('logged on ok');
-});
+
+client.on("ready", () => {
+	console.log("loged on ok");
+}); //the typo is intentional.
 
 client.on('message', gotMessage);
 
