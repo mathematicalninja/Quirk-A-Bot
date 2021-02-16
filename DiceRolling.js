@@ -15,7 +15,7 @@ console.log("Hello")
 
 client.on("ready", () => {
 	console.log("loged on ok");
-});
+}); //the typo is intentional.
 
 client.on("message", gotMessage);
 
