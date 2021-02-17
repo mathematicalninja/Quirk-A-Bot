@@ -1,5 +1,5 @@
 import regexToDice from '../../utils/regexToDice.js';
-import doTheRolling from '../../utils/doTheRolling.js';
+import rollVampire from '../../utils/rollVampire.js';
 import rollRouse from '../../utils/rollRouse.js';
 import { DICE_ROLL_REGEX, ROUSE_REGEX } from '../../constants.js';
 
@@ -17,7 +17,7 @@ export default function handleDiceRollingChannelMessage(msg) {
 	if (regexMatch) {
 		// Add in a roll 3d10 style roller (with multi support "roll 3d4, 2d6")
 		const playerDice = regexToDice(regexMatch);
-		return msg.reply(doTheRolling(playerDice));
+		return msg.reply(rollVampire(playerDice));
 	}
 
 	// handle player asked to rouse the blood.
