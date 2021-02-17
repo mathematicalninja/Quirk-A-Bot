@@ -1,8 +1,8 @@
 import { Client } from 'discord.js';
 import dotenv from 'dotenv';
 
-import onReady from './src/discord-handlers/on-ready.js';
-import gotMessage from './src/discord-handlers/on-message/index.js';
+import handleReady from './src/discord-handlers/handleReady.js';
+import handleMessage from './src/discord-handlers/handleMessage/index.js';
 
 // Setting the .env file to a locally accessible form
 dotenv.config();
@@ -16,7 +16,7 @@ client.login(process.env.DISCORD_BOT_TOKEN);
 console.log('Hello');
 
 // handle on Discord client ready
-client.on('ready', onReady);
+client.on('ready', handleReady);
 
 // handle on Discord message received
 client.on('message', gotMessage);
