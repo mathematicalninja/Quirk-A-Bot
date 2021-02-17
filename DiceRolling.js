@@ -34,28 +34,29 @@ const ROUSE_REGEX = /(?:[Rr]+[Oo]+[Us]*[Ss]+[Ee]*\D*(\d+))|(?:[Rr]ouse)/i;
  * @param {Object} msg Discord message object
  */
 function gotMessage(msg) {
+	// Quirk-A-Bot reads every message in the Discord server (but not in a creepy way)
+
 	// ignore messages from a bot
 	if (msg.author.bot) return;
 
-	// Quirk-A-Bot reads every message in the Discord server (but not in a creepy way)
+	if (msg.channel.id == process.env.DICE_ROLLING_CHANNEL) {
+		// If this is the dicerolling Channel, then we roll some dice.
 
-	// ignore messages not from Dice Rolling channel
-	// Note that future intentions might need this to swap back.
-	// msg.channel.id in array of channels, continue vs not in
-	// I'm not sure of the optimal way round atm
-	if (msg.channel.id !== process.env.DICE_ROLLING_CHANNEL) return;
+		// Handle message requesting hungry and/or Clean Dice rolls
+		if (msg.content.match(DICE_ROLL_REGEX)) {
+			// Add in a roll 3d10 style roller (with multi support "roll 3d4, 2d6")
+			const playerDice = regexToDice(msg.content.match(DICE_ROLL_REGEX));
+			msg.reply(doTheRolling(playerDice));
+		} else if (msg.content.match(ROUSE_REGEX)) {
+			// player asked to rouse the blood.
+			const rouseDice = parseInt(msg.content.match(ROUSE_REGEX)[1]) || 1;
+			msg.reply(rollRouse(rouseDice));
+		};
+	};
 
-	// parse non-bot messages in Dice Rolling channel
-
-	// Handle message requesting hungry and/or Clean Dice rolls
-	if (msg.content.match(DICE_ROLL_REGEX)) {
-		// Add in a roll 3d10 style roller (with multi support "roll 3d4, 2d6")
-		const playerDice = regexToDice(msg.content.match(DICE_ROLL_REGEX));
-		msg.reply(doTheRolling(playerDice));
-	} else if (msg.content.match(ROUSE_REGEX)) {
-		// player asked to rouse the blood.
-		const rouseDice = parseInt(msg.content.match(ROUSE_REGEX)[1]) || 1;
-		msg.reply(rollRouse(rouseDice));
+	if (msg.channel.id == process.env.TEST_CHANNEL_ID) {
+		// Code to be tested.
+		TestTextOutput(msg);
 	};
 };
 
@@ -166,3 +167,7 @@ function rollRouse(rouseDice) {
 	};
 	return text;
 };
+
+function TestTextOutput(msg) {
+
+}
