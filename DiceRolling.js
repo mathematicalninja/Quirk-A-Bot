@@ -39,7 +39,7 @@ function gotMessage(msg) {
 	// ignore messages from a bot
 	if (msg.author.bot) return;
 
-	if (msg.channel.id == process.env.DICE_ROLLING_CHANNEL) {
+	if (msg.channel.id == process.env.DICE_ROLLING_CHANNEL || msg.channel.id == process.env.TEST_CHANNEL_ID) {
 		// If this is the dicerolling Channel, then we roll some dice.
 
 		// Handle message requesting hungry and/or Clean Dice rolls
@@ -169,5 +169,7 @@ function rollRouse(rouseDice) {
 };
 
 function TestTextOutput(msg) {
-
-}
+	// let replyString = "";
+	// msg.reply(replyString);
+	// console.log(replyString);
+};
