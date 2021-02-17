@@ -14,7 +14,6 @@ export default function handleMessage(msg) {
 		case process.env.DICE_ROLLING_CHANNEL:
 			return handleDiceRollingChannelMessage(msg);
 		default:
-			// do nothing
-			return null;
+			return null; // do nothing
 	}
 }

@@ -4,6 +4,5 @@
  * @returns the first and/or second number if defined (otherwise defaults to 0)
  */
 export default function regexToDice(RegexMatch) {
-	//
-	return [parseInt(RegexMatch[1]), parseInt(RegexMatch[2]) || 0];
+	return [parseInt(RegexMatch[1]) || 0, parseInt(RegexMatch[2]) || 0];
 }
