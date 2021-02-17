@@ -12,19 +12,13 @@ export default function rollRouse(rouseDice) {
 
 	for (let i = 0; i < rouseDice; i++) {
 		// on rolling each die, checks if it's 6+, then the rouse was a success.
+		// ? does it only take one dice being above 5 to succeed?
 		const die = rollAd10();
-		if (die > 5) {
-			win = true;
-		}
+		if (die > 5) win = true;
+
 		rouseResults.push(die);
 	}
 
 	// Shows the player their dice, followed by the result.
-	let text = `\nRouse Dice: ${rouseResults.join(', ')}\n`;
-	if (win) {
-		text += successText;
-	} else {
-		text += failText;
-	}
-	return text;
+	return `\nRouse Dice: ${rouseResults.join(', ')}\n${win ? successText : failText}`;
 }
