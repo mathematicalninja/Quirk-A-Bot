@@ -1,4 +1,4 @@
-import rollAd10 from './rollAd10';
+import rollAd10 from './rollAd10.js';
 
 /**
  * @param {number} rouseDice number of dice to be used in rouse check
