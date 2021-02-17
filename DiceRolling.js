@@ -118,6 +118,8 @@ function cleanRoll(diceCount) {
 			die = process.env.CLEAN_FAIL;
 		} else if (die == 10) {
 			die = process.env.CLEAN_CRIT;
+		} else if (die > 5) {
+			die = "**" + die + "**"
 		};
 		results.push(die)
 	};
@@ -140,6 +142,8 @@ function hungryRoll(diceCount) {
 			die = process.env.HUNGRY_FAIL;
 		} else if (die == 10) {
 			die = process.env.HUNGRY_CRIT;
+		} else if (die > 5) {
+			die = "**" + die + "**"
 		};
 		results.push(die)
 	};
