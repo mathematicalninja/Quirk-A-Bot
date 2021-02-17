@@ -1,8 +1,8 @@
 import { Client } from 'discord.js';
 import dotenv from 'dotenv';
 
-import handleReady from './src/discord-handlers/handleReady.js';
-import handleMessage from './src/discord-handlers/handleMessage/index.js';
+import handleReady from './discord-handlers/handleReady.js';
+import handleMessage from './discord-handlers/handleMessage/index.js';
 
 // Setting the .env file to a locally accessible form
 dotenv.config();
