@@ -8,8 +8,12 @@ import showRolls from './showRolls.js';
  * @returns {string} Message tooutput
  */
 export default function doTheRolling(playerDice) {
+	// make sure atleast pool dice were defined
+	if (!playerDice[0] && !playerDice[1]) return 'Please define number of pool dice to roll atleast.';
+
 	//respec to "vampireRolling" when other rolls are implemented
 	const [cleanDiceCount, hungerDiceCount] = kindOfDice(playerDice);
+
 	const RESULTS = [rollDice(cleanDiceCount), rollDice(hungerDiceCount)];
 	const WHAT_TO_WRITE = showRolls(RESULTS);
 	return WHAT_TO_WRITE;
