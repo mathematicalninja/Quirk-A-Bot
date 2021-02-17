@@ -1,9 +1,10 @@
-
 import regexToDice from '../../utils/regexToDice';
+import doTheRolling from '../../utils/doTheRolling';
+import rollRouse from '../../utils/rollRouse';
+import { DICE_ROLL_REGEX, ROUSE_REGEX } from '../../constants';
 
-
-function handleMessage ( msg ) {
-	// parse non-bot messages in Dice Rolling channel 
+function handleMessage(msg) {
+	// parse non-bot messages in Dice Rolling channel
 	if (msg.content.match(DICE_ROLL_REGEX)) {
 		// Add in a roll 3d10 style roller (with multi support "roll 3d4, 2d6")
 		const playerDice = regexToDice(msg.content.match(DICE_ROLL_REGEX));

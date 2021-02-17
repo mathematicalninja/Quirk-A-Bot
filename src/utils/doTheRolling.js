@@ -1,4 +1,6 @@
-import kindOfDice from './kindOfDice'
+import kindOfDice from './kindOfDice';
+import rollDice from './rollDice';
+import showRolls from './showRolls';
 
 /**
  * The wrapper function to do the actuall rolling
