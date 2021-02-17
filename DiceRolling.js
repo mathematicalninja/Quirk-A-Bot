@@ -26,45 +26,9 @@ const DICE_ROLL_REGEX = /[Rr]+[Oo]+[Ll]+\D*(\d+)\D*(\d*)/i;
 const ROUSE_REGEX = /(?:[Rr]+[Oo]+[Us]*[Ss]+[Ee]*\D*(\d+))|(?:[Rr]ouse)/i;
 
 
-/**
- * Discord message handler
- * @param {Object} msg Discord message object
- */
-function gotMessage(msg) {
-	// ignore messages from a bot
-	if (msg.author.bot) return;
 
-	// Quirk-A-Bot reads every message in the Discord server (but not in a creepy way)
 
-	// ignore messages not from Dice Rolling channel
-	// Note that future intentions might need this to swap back.
-	// msg.channel.id in array of channels, continue vs not in
-	// I'm not sure of the optimal way round atm
-	if (msg.channel.id !== process.env.DICE_ROLLING_CHANNEL) return;
 
-	// parse non-bot messages in Dice Rolling channel
-
-	// Handle message requesting hungry and/or Clean Dice rolls
-	if (msg.content.match(DICE_ROLL_REGEX)) {
-		// Add in a roll 3d10 style roller (with multi support "roll 3d4, 2d6")
-		const playerDice = regexToDice(msg.content.match(DICE_ROLL_REGEX));
-		msg.reply(doTheRolling(playerDice));
-	} else if (msg.content.match(ROUSE_REGEX)) {
-		// player asked to rouse the blood.
-		const rouseDice = parseInt(msg.content.match(ROUSE_REGEX)[1]) || 1;
-		msg.reply(rollRouse(rouseDice));
-	};
-};
-
-/**
- * Turns the regex's text into js integers, defaults to 0 if hunger dice not defined
- * @param {Array<number>} RegexMatch result of regex, including capture groups
- * @returns the first and/or second number if defined (otherwise defaults to 0)
- */
-function regexToDice(RegexMatch) {
-	//
-	return [parseInt(RegexMatch[1]), parseInt(RegexMatch[2]) || 0];
-}
 
 /**
  * The wrapper function to do the actuall rolling
