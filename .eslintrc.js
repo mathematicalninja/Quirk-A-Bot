@@ -25,5 +25,6 @@ module.exports = {
 		'space-in-parens': 0,
 		'space-before-function-paren': 0,
 		'import/extensions': [1, { js: 'always', json: 'never' }],
+		'array-bracket-spacing': 0,
 	},
 };
