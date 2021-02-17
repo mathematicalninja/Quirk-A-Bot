@@ -4,8 +4,8 @@
  * @returns {Array<number>} a number array tuple of [cleanDice, hungerDice]
  */
 export default function kindOfDice([A, B]) {
-	let pool = Math.max(A, B);
-	let hungerDice = Math.min(A, B);
-	let cleanDice = pool - hungerDice;
+	const pool = Math.max(A, B);
+	const hungerDice = Math.min(A, B);
+	const cleanDice = pool - hungerDice;
 	return [cleanDice, hungerDice];
 }
