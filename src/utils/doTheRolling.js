@@ -1,6 +1,6 @@
-import kindOfDice from './kindOfDice';
-import rollDice from './rollDice';
-import showRolls from './showRolls';
+import kindOfDice from './kindOfDice.js';
+import rollDice from './rollDice.js';
+import showRolls from './showRolls.js';
 
 /**
  * The wrapper function to do the actuall rolling

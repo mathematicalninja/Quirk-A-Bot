@@ -1,5 +1,6 @@
 module.exports = {
 	env: {
+		browser: true,
 		node: true,
 		es6: true,
 	},
@@ -23,5 +24,6 @@ module.exports = {
 		'consistent-return': 0,
 		'space-in-parens': 0,
 		'space-before-function-paren': 0,
+		'import/extensions': [1, { js: 'always', json: 'never' }],
 	},
 };
