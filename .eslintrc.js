@@ -20,6 +20,9 @@ module.exports = {
 		'max-len': 0,
 		quotes: 0,
 		'no-multiple-empty-lines': 0,
-		'eol-last': 1
+		'eol-last': 1,
+		'consistent-return': 0,
+		'space-in-parens': 0,
+		'space-before-function-paren': 0
 	},
 };
