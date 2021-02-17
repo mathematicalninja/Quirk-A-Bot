@@ -23,6 +23,6 @@ module.exports = {
 		'eol-last': 1,
 		'consistent-return': 0,
 		'space-in-parens': 0,
-		'space-before-function-paren': 0
+		'space-before-function-paren': 0,
 	},
 };

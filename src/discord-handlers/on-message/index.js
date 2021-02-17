@@ -9,21 +9,13 @@ function gotMessage(msg) {
 	if (msg.author.bot) return;
 
 	// Quirk-A-Bot reads every message in the Discord server (but not in a creepy way)
-
+  // handle messages from different channels
 	switch (msg.channel.id) {
 		case process.env.DICE_ROLLING_CHANNEL:
 			return diceRollChannelMessageHandler(msg);
 		default:
-			return;
+			return null;
 	}
-
-	// ignore messages not from Dice Rolling channel
-	// Note that future intentions might need this to swap back.
-	// msg.channel.id in array of channels, continue vs not in
-	// I'm not sure of the optimal way round atm
-	// if (msg.channel.id !== process.env.DICE_ROLLING_CHANNEL) return;
-
-	
 }
 
 export default gotMessage;
