@@ -4,7 +4,7 @@ import diceRollChannelMessageHandler from './dice-rolling-channel.js';
  * Discord message handler
  * @param {Object} msg Discord message object
  */
-export default function gotMessage(msg) {
+export default function handleMessage(msg) {
 	// ignore messages from a bot
 	if (msg.author.bot) return;
 
