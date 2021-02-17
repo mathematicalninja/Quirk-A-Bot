@@ -143,8 +143,8 @@ function showRolls([cleanResults, hungryResults]) {
  */
 
 function rollRouse(rouseDice) {
-	let successText = "Your hunger remains unchanged.";
-	let failText = "Your hunger increases after this action.";
+	let successText = "Your hunger...remains unchanged.";
+	let failText = "Your hunger...increases after this action.";
 	let rouseResults = [];
 	let win = false
 
