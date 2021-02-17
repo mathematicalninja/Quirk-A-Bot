@@ -30,5 +30,5 @@ export default function handleDiceRollingChannelMessage(msg) {
 	}
 
 	// provide feedback, even if command is not recognised
-	return msg.reply(`Sorry, I dont know what "${msg.content}" means`);
+	// return msg.reply(`Sorry, I dont know what "${msg.content}" means`);
 }
