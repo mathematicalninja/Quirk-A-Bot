@@ -8,7 +8,6 @@ import { DICE_ROLL_REGEX, ROUSE_REGEX } from '../../constants.js';
  * @param {Object} msg Discord message object
  */
 export default function handleDiceRollingChannelMessage(msg) {
-	
 	// variable to hold regex result to prevent repeated executions
 	let regexMatch;
 
@@ -21,9 +20,12 @@ export default function handleDiceRollingChannelMessage(msg) {
 	}
 
 	// handle player asked to rouse the blood.
-	regexMatch = msg.content.match(ROUSE_REGEX); 
+	regexMatch = msg.content.match(ROUSE_REGEX);
 	if (regexMatch) {
 		const rouseDice = parseInt(regexMatch[1]) || 1;
 		return msg.reply(rollRouse(rouseDice));
 	}
+
+	// provide feedback, even if command is not recognised
+	return msg.reply(`Sorry, I dont know what "${msg.content}" means`);
 }
