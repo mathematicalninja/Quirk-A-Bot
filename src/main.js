@@ -13,7 +13,7 @@ const client = new Client();
 client.login(process.env.DISCORD_BOT_TOKEN);
 
 // Hello ^-^
-console.log('Hello');
+console.log(__filename, '\n\tHello');
 
 // handle on Discord client ready
 client.on('ready', handleReady);
