@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 // Setting the .env file to a locally accessible form
-require('dotenv').config(); 
+require('dotenv').config();
 
 // logging in as a bot
 client.login(process.env.DISCORD_BOT_TOKEN);
@@ -19,19 +19,27 @@ client.on("ready", () => {
 client.on('message', gotMessage);
 
 // __________________________________________________________________________
-//matches Roll and it's easiest typos followed by two numbers, sperating all three parts by anything other than digits (e.g. roll532 makes no sense, but RoL5 2 does) Matches a one or two numbers, if the second number exists
-const DICE_ROLL_REGEX = /r+o+l+\D*(\d+)\D*(\d*)/i;
+// matches Roll and it's easiest typos followed by two numbers, sperating all three parts by anything other than digits (e.g. roll532 makes no sense, but RoL5 2 does) Matches a one or two numbers, if the second number exists
+const DICE_ROLL_REGEX = /[Rr]+[Oo]+[Ll]+\D*(\d+)\D*(\d*)/i;
+
+// matches if a player asks to rouse, or rouse <n>.
+const ROUSE_REGEX = /(?:[Rr]+[Oo]+[Us]*[Ss]+[Ee]*\D*(\d+))|(?:[Rr]ouse)/i;
+
 
 /**
  * Discord message handler
- * @param {Object} msg Discord message object 
+ * @param {Object} msg Discord message object
  */
 function gotMessage(msg) {
 	// ignore messages from a bot
 	if (msg.author.bot) return;
 
 	// Quirk-A-Bot reads every message in the Discord server (but not in a creepy way)
+
 	// ignore messages not from Dice Rolling channel
+	// Note that future intentions might need this to swap back.
+	// msg.channel.id in array of channels, continue vs not in
+	// I'm not sure of the optimal way round atm
 	if (msg.channel.id !== process.env.DICE_ROLLING_CHANNEL) return;
 
 	// parse non-bot messages in Dice Rolling channel
@@ -41,8 +49,12 @@ function gotMessage(msg) {
 		// Add in a roll 3d10 style roller (with multi support "roll 3d4, 2d6")
 		const playerDice = regexToDice(msg.content.match(DICE_ROLL_REGEX));
 		msg.reply(doTheRolling(playerDice));
-	}
-}
+	} else if (msg.content.match(ROUSE_REGEX)) {
+		// player asked to rouse the blood.
+		const rouseDice = parseInt(msg.content.match(ROUSE_REGEX)[1]) || 1;
+		msg.reply(rollRouse(rouseDice));
+	};
+};
 
 /**
  * Turns the regex's text into js integers, defaults to 0 if hunger dice not defined
@@ -50,7 +62,7 @@ function gotMessage(msg) {
  * @returns the first and/or second number if defined (otherwise defaults to 0)
  */
 function regexToDice(RegexMatch) {
-	// 
+	//
 	return [parseInt(RegexMatch[1]), parseInt(RegexMatch[2]) || 0];
 }
 
@@ -59,7 +71,7 @@ function regexToDice(RegexMatch) {
  * @param {Array<number>} playerDice array of numbers from the user
  * @returns {string} Message tooutput
  */
-function doTheRolling(playerDice) { 
+function doTheRolling(playerDice) {
 	//respec to "vampireRolling" when other rolls are implemented
 	const [cleanDiceCount, hungerDiceCount] = kindOfDice(playerDice);
 	const RESULTS = [rollDice(cleanDiceCount), rollDice(hungerDiceCount)];
@@ -105,7 +117,7 @@ function rollDice(diceCount) {
  * Produces a description of roll results
  */
 function showRolls([cleanResults, hungryResults]) {
-	// respec to Vampire something when the distinction matters. 
+	// respec to Vampire something when the distinction matters.
 
 	// prevent unecessary work if nothing was rolled
 	if (cleanResults.length + hungryResults.length == 0) return 'please be sensible.';
@@ -121,4 +133,33 @@ function showRolls([cleanResults, hungryResults]) {
 	if (hungryResults.length) hungryString = `${cleanString ? '\n' : ''}Hungry Dice: ${hungryResults.join(', ')}`;
 
 	return cleanString + hungryString;
-}
+};
+/**
+ * @param {number} rouseDice number of dice to be used in rouse check
+ * @returns {string} The results of the rouse check, and a brief explination.
+ */
+
+function rollRouse(rouseDice) {
+	let successText = "Your hunger remains unchanged.";
+	let failText = "Your hunger increases after this action.";
+	let rouseResults = [];
+	let win = false
+
+	for (i = 0; i < rouseDice; i++) {
+		// on rolling each die, checks if it's 6+, then the rouse was a success.
+		let die = rollAd10();
+		if (die > 5) {
+			win = true;
+		};
+		rouseResults.push(die);
+	};
+
+	// Shows the player their dice, followed by the result.
+	let text = `\nRouse Dice: ${rouseResults.join(', ')}\n`;
+	if (win) {
+		text += successText;
+	} else {
+		text += failText;
+	};
+	return text;
+};
