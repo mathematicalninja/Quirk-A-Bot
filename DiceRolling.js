@@ -154,12 +154,15 @@ function rollRouse(rouseDice) {
 		let die = rollAd10();
 		if (die > 5) {
 			win = true;
+			die = process.env.CLEAN_SUCCESS;
+		} else {
+			die = process.env.HUNGRY_FAIL;
 		};
 		rouseResults.push(die);
 	};
 
 	// Shows the player their dice, followed by the result.
-	let text = `\nRouse Dice: ${rouseResults.join(', ')}\n`;
+	let text = `\nRouse Dice: ${rouseResults.join(' ')}\n`;
 	if (win) {
 		text += successText;
 	} else {
