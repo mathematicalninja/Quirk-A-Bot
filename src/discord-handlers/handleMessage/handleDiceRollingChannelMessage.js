@@ -20,7 +20,7 @@ export default function handleDiceRollingChannelMessage(msg) {
 	}
 
 	// handle player asked to rouse the blood.
-	regexMatch = msg.content.match(ROUSE_REGEX); 
+	regexMatch = msg.content.match(ROUSE_REGEX);
 	if (regexMatch) {
 		const rouseDice = parseInt(regexMatch[1]) || 1;
 		return msg.reply(rollRouse(rouseDice));
