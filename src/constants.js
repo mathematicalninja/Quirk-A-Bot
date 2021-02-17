@@ -10,4 +10,4 @@ export const DICE_ROLL_REGEX = /r+o+l+\D*(\d+)\D*(\d*)/i;
 /**
  * matches if a player asks to ro[use], or ro[use] <n>.
  */
-export const ROUSE_REGEX = /(?:r+o+u*s*e*\D*(\d+)*)|(?:rouse)/i;
+export const ROUSE_REGEX = /r+o+u*s*e*\D*(\d+)*/i;
