@@ -1,6 +1,7 @@
 import rollAd10 from './rollAd10.js';
 
 /**
+ * Rolls a rouse check
  * @param {number} rouseDice number of dice to be used in rouse check
  * @returns {string} The results of the rouse check, and a brief explination.
  */
