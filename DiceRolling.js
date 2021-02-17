@@ -78,7 +78,7 @@ function regexToDice(RegexMatch) {
 function doTheRolling(playerDice) {
 	//respec to "vampireRolling" when other rolls are implemented
 	const [cleanDiceCount, hungerDiceCount] = kindOfDice(playerDice);
-	const RESULTS = [rollDice(cleanDiceCount), rollDice(hungerDiceCount)];
+	const RESULTS = [cleanRoll(cleanDiceCount), hungryRoll(hungerDiceCount)];
 	const WHAT_TO_WRITE = showRolls(RESULTS);
 	return WHAT_TO_WRITE;
 }
@@ -106,13 +106,43 @@ function kindOfDice([A, B]) {
 /**
  * Rolls a specified number of dice
  * @param {number} diceCount the number of dice to roll
- * @returns {Array<number>} the resulting dice rolls
+ * @returns {Array<number>} the resulting dice rolls with clean symbols on 10 and 1's
  */
-function rollDice(diceCount) {
+function cleanRoll(diceCount) {
 	let results = [];
 
 	// roll number of dice based on dice count
-	for (let i = 0; i < diceCount; i++) results.push(rollAd10());
+	for (let i = 0; i < diceCount; i++) {
+		let die = rollAd10();
+		if (die == 1) {
+			die = process.env.CLEAN_FAIL;
+		} else if (die == 10) {
+			die = process.env.CLEAN_CRIT;
+		};
+		results.push(die)
+	};
+
+	return results;
+}
+
+/**
+ * Rolls a specified number of dice
+ * @param {number} diceCount the number of dice to roll
+ * @returns {Array<number>} the resulting dice rolls with hunger symbols on 10 and 1's
+ */
+function hungryRoll(diceCount) {
+	let results = [];
+
+	// roll number of dice based on dice count
+	for (let i = 0; i < diceCount; i++) {
+		let die = rollAd10();
+		if (die == 1) {
+			die = process.env.HUNGRY_FAIL;
+		} else if (die == 10) {
+			die = process.env.HUNGRY_CRIT;
+		};
+		results.push(die)
+	};
 
 	return results;
 }
