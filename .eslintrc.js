@@ -26,5 +26,7 @@ module.exports = {
 		'space-before-function-paren': 0,
 		'import/extensions': [1, { js: 'always', json: 'never' }],
 		'array-bracket-spacing': 0,
+		'no-unused-vars': 1,
+		'comma-dangle': 1,
 	},
 };

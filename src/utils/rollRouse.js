@@ -6,8 +6,8 @@ import rollAd10 from './rollAd10.js';
  * @returns {string} The results of the rouse check, and a brief explination.
  */
 export default function rollRouse(rouseDice) {
-	const successText = 'Your hunger remains unchanged.';
-	const failText = 'Your hunger increases after this action.';
+	const successText = 'Your hunger...remains unchanged.';
+	const failText = 'Your hunger...increases after this action.';
 	const rouseResults = [];
 	let win = false;
 
