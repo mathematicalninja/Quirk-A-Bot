@@ -1,4 +1,4 @@
-import rollAd10 from './rollAd10';
+import rollAd10 from './rollAd10.js';
 
 /**
  * Rolls a specified number of dice

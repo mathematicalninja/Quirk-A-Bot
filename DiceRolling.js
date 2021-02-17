@@ -1,13 +1,13 @@
-const Discord = require('discord.js');
-const gotMessage = require('./src/discord-handlers/on-message/index');
-const onReady = require('./src/discord-handlers/on-ready');
+import { Client } from 'discord.js';
+import dotenv from 'dotenv';
+
+import onReady from './src/discord-handlers/on-ready.js';
+import gotMessage from './src/discord-handlers/on-message/index.js';
 
 // Setting the .env file to a locally accessible form
-require('dotenv').config();
+dotenv.config();
 
-// loading discord interactive JavaScript
-
-const client = new Discord.Client();
+const client = new Client();
 
 // logging in as a bot
 client.login(process.env.DISCORD_BOT_TOKEN);
