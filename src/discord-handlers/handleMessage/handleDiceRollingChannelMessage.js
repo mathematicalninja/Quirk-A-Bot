@@ -3,7 +3,7 @@ import doTheRolling from '../../utils/doTheRolling.js';
 import rollRouse from '../../utils/rollRouse.js';
 import { DICE_ROLL_REGEX, ROUSE_REGEX } from '../../constants.js';
 
-function handleMessage(msg) {
+export default function handleDiceRollingChannelMessage(msg) {
 	// parse non-bot messages in Dice Rolling channel
 	if (msg.content.match(DICE_ROLL_REGEX)) {
 		// Add in a roll 3d10 style roller (with multi support "roll 3d4, 2d6")
@@ -15,5 +15,3 @@ function handleMessage(msg) {
 		msg.reply(rollRouse(rouseDice));
 	}
 }
-
-export default handleMessage;
