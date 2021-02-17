@@ -14,8 +14,14 @@ export default function rollRouse(rouseDice) {
 	for (let i = 0; i < rouseDice; i++) {
 		// on rolling each die, checks if it's 6+, then the rouse was a success.
 		// ? does it only take one dice being above 5 to succeed? does rolling 1s affect result?
-		const die = rollAd10();
-		if (die > 5) win = true;
+		// todo dont reuse die variable
+		let die = rollAd10();
+		if (die > 5) {
+			win = true;
+			die = process.env.CLEAN_SUCCESS;
+		} else {
+			die = process.env.HUNGRY_FAIL;
+		}
 
 		rouseResults.push(die);
 	}

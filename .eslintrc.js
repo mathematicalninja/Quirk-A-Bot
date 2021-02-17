@@ -28,5 +28,7 @@ module.exports = {
 		'array-bracket-spacing': 0,
 		'no-unused-vars': 1,
 		'comma-dangle': 1,
+		'nonblock-statement-body-position': 0,
+		curly: 0,
 	},
 };
