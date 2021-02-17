@@ -26,6 +26,9 @@ const DICE_ROLL_REGEX = /[Rr]+[Oo]+[Ll]+\D*(\d+)\D*(\d*)/i;
 const ROUSE_REGEX = /(?:[Rr]+[Oo]+[Us]*[Ss]+[Ee]*\D*(\d+))|(?:[Rr]ouse)/i;
 
 
+// rerolls up to 3 dice the player asks for, and keeps the rest.
+// reroll ((\d){1,3})\w*(keep\D*(\d)+)?(\w*(hunger)\D*(\d)+)?
+
 /**
  * Discord message handler
  * @param {Object} msg Discord message object
