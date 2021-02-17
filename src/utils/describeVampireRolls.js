@@ -1,9 +1,7 @@
 /**
- * Produces a description of roll results
+ * Produces a description of vampire roll results
  */
-export default function showRolls([cleanResults, hungryResults]) {
-	// TODO respec to Vampire something when the distinction matters.
-
+export default function describeVampireRolls([cleanResults, hungryResults]) {
 	// prevent unecessary work if nothing was rolled
 	if (cleanResults.length + hungryResults.length === 0) return 'please be sensible.';
 

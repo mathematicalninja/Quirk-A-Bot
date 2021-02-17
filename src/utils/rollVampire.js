@@ -1,6 +1,6 @@
 import kindOfDice from './kindOfDice.js';
 import rollDice from './rollDice.js';
-import showRolls from './showRolls.js';
+import describeVampireRolls from './describeVampireRolls.js';
 
 /**
  * The wrapper function to do the actual rolling
@@ -13,6 +13,6 @@ export default function rollVampire(playerDice) {
 
 	const [cleanDiceCount, hungerDiceCount] = kindOfDice(playerDice);
 	const RESULTS = [rollDice(cleanDiceCount), rollDice(hungerDiceCount)];
-	const WHAT_TO_WRITE = showRolls(RESULTS);
+	const WHAT_TO_WRITE = describeVampireRolls(RESULTS);
 	return WHAT_TO_WRITE;
 }
