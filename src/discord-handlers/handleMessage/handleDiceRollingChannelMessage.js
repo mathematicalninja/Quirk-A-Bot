@@ -3,6 +3,9 @@ import rollVampire from '../../utils/rollVampire.js';
 import rollRouse from '../../utils/rollRouse.js';
 import { DICE_ROLL_REGEX, ROUSE_REGEX } from '../../constants.js';
 
+// rerolls up to 3 dice the player asks for, and keeps the rest.
+// reroll ((\d){1,3})\w*(keep\D*(\d)+)?(\w*(hunger)\D*(\d)+)?
+
 /**
  * Parses non-bot messages in Dice Rolling channel
  * @param {Object} msg Discord message object
