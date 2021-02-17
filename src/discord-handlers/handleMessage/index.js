@@ -1,4 +1,4 @@
-import diceRollChannelMessageHandler from './dice-rolling-channel.js';
+import handleDiceRollingChannelMessage from './handleDiceRollingChannelMessage.js';
 
 /**
  * Discord message handler
@@ -8,15 +8,13 @@ export default function handleMessage(msg) {
 	// ignore messages from a bot
 	if (msg.author.bot) return;
 
-	console.log('Received human message');
 	// Quirk-A-Bot reads every message in the Discord server (but not in a creepy way)
 	// handle messages from different channels
 	switch (msg.channel.id) {
 		case process.env.DICE_ROLLING_CHANNEL:
-			return diceRollChannelMessageHandler(msg);
+			return handleDiceRollingChannelMessage(msg);
 		default:
+			// do nothing
 			return null;
 	}
 }
-
-// export default gotMessage;
