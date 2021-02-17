@@ -1,5 +1,5 @@
 import kindOfDice from './kindOfDice.js';
-import rollDice from './rollDice.js';
+import rollDiceByCount from './rollDiceByCount.js';
 import describeVampireRolls from './describeVampireRolls.js';
 
 /**
@@ -12,7 +12,7 @@ export default function rollVampire(playerDice) {
 	if (!playerDice[0] && !playerDice[1]) return 'Please define the number of pool dice to roll atleast (greater than 0).';
 
 	const [cleanDiceCount, hungerDiceCount] = kindOfDice(playerDice);
-	const RESULTS = [rollDice(cleanDiceCount), rollDice(hungerDiceCount)];
+	const RESULTS = [rollDiceByCount(cleanDiceCount), rollDiceByCount(hungerDiceCount)];
 	const WHAT_TO_WRITE = describeVampireRolls(RESULTS);
 	return WHAT_TO_WRITE;
 }

@@ -5,7 +5,7 @@ import rollAd10 from './rollAd10.js';
  * @param {number} diceCount the number of dice to roll
  * @returns {Array<number>} the resulting dice rolls
  */
-export default function rollDice(diceCount) {
+export default function rollDiceByCount(diceCount) {
 	const results = [];
 
 	// roll number of dice based on dice count
