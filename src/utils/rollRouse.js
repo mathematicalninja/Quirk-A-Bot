@@ -1,16 +1,18 @@
+import rollAd10 from './rollAd10';
+
 /**
  * @param {number} rouseDice number of dice to be used in rouse check
  * @returns {string} The results of the rouse check, and a brief explination.
  */
 export default function rollRouse(rouseDice) {
-	let successText = 'Your hunger remains unchanged.';
-	let failText = 'Your hunger increases after this action.';
-	let rouseResults = [];
+	const successText = 'Your hunger remains unchanged.';
+	const failText = 'Your hunger increases after this action.';
+	const rouseResults = [];
 	let win = false;
 
-	for (i = 0; i < rouseDice; i++) {
+	for (let i = 0; i < rouseDice; i++) {
 		// on rolling each die, checks if it's 6+, then the rouse was a success.
-		let die = rollAd10();
+		const die = rollAd10();
 		if (die > 5) {
 			win = true;
 		}
