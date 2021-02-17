@@ -16,7 +16,7 @@ export default function hungryRoll(diceCount) {
 		} else if (die === 10) {
 			die = process.env.HUNGRY_CRIT;
 		} else if (die > 5) {
-			die = `** ${die} **`;
+			die = `**${die}**`;
 		}
 		results.push(die);
 	}

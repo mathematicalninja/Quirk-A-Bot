@@ -16,7 +16,7 @@ export default function cleanRoll(diceCount) {
 		} else if (die === 10) {
 			die = process.env.CLEAN_CRIT;
 		} else if (die > 5) {
-			die = `** ${die} **`;
+			die = `**${die}**`;
 		}
 		results.push(die);
 	}
