@@ -1,7 +1,7 @@
-import regexToDice from '../../utils/regexToDice';
-import doTheRolling from '../../utils/doTheRolling';
-import rollRouse from '../../utils/rollRouse';
-import { DICE_ROLL_REGEX, ROUSE_REGEX } from '../../constants';
+import regexToDice from '../../utils/regexToDice.js';
+import doTheRolling from '../../utils/doTheRolling.js';
+import rollRouse from '../../utils/rollRouse.js';
+import { DICE_ROLL_REGEX, ROUSE_REGEX } from '../../constants.js';
 
 function handleMessage(msg) {
 	// parse non-bot messages in Dice Rolling channel
