@@ -19,6 +19,9 @@ export default function rollRouse(rouseDice) {
 		rouseResults.push(die);
 	}
 
+	// select appropriate result text
+	const resultText = win ? successText : failText;
+
 	// Shows the player their dice, followed by the result.
-	return `\nRouse Dice: ${rouseResults.join(', ')}\n${win ? successText : failText}`;
+	return `\nRouse Dice: ${rouseResults.join(', ')}\n${resultText}`;
 }
