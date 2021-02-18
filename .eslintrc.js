@@ -30,5 +30,7 @@ module.exports = {
 		'comma-dangle': 1,
 		'nonblock-statement-body-position': 0,
 		curly: 0,
+		'arrow-parens': 0,
+		'object-curly-newline': 0,
 	},
 };
