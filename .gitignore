@@ -2,4 +2,6 @@
 example message
 notes
 node_modules/
+**/node_modules/**
+**/build/**
 Blank
