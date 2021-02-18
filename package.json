@@ -7,8 +7,8 @@
 	"module": "discord-bot/src/main.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node ./discord-bot",
-		"dev-bot": "nodemon ./discord-bot",
+		"start": "yarn --cwd packages/discord-bot start",
+		"dev-bot": "nodemon .",
 		"dev-client": "yarn --cwd packages/character-sheet-client start",
 		"build-client": "yarn --cwd packages/character-sheet-client build"
 	},
