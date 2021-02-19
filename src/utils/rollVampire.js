@@ -1,8 +1,6 @@
 import kindOfDice from './kindOfDice.js';
 import rollDiceByCount from './rollDiceByCount.js';
 import describeVampireRolls from './describeVampireRolls.js';
-import cleanRoll from './cleanRoll.js';
-import hungryRoll from './hungryRoll.js';
 
 /**
  * The wrapper function to do the actual rolling
@@ -16,7 +14,7 @@ export default function rollVampire(playerDice) {
 
 	const [cleanDiceCount, hungerDiceCount] = kindOfDice(playerDice);
 	// todo does this need 2 different roll functions, or should it be 2 different roll interpreters?
-	const RESULTS = [cleanRoll(cleanDiceCount), hungryRoll(hungerDiceCount)];
+	const RESULTS = [rollDiceByCount(cleanDiceCount), rollDiceByCount(hungerDiceCount)];
 	const WHAT_TO_WRITE = describeVampireRolls(RESULTS);
 	return WHAT_TO_WRITE;
 }
