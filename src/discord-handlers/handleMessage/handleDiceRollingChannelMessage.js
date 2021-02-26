@@ -1,7 +1,11 @@
 import regexToDice from '../../utils/regexToDice.js';
 import rollVampire from '../../utils/rollVampire.js';
 import rollRouse from '../../utils/rollRouse.js';
-import { DICE_ROLL_REGEX, ROUSE_REGEX } from '../../constants.js';
+import simplifyRolls from '../../utils/simplifyRolls.js';
+import {
+	DICE_ROLL_REGEX,
+	ROUSE_REGEX
+} from '../../constants.js';
 
 // rerolls up to 3 dice the player asks for, and keeps the rest.
 // reroll ((\d){1,3})\w*(keep\D*(\d)+)?(\w*(hunger)\D*(\d)+)?
@@ -13,13 +17,14 @@ import { DICE_ROLL_REGEX, ROUSE_REGEX } from '../../constants.js';
 export default function handleDiceRollingChannelMessage(msg) {
 	// variable to hold regex result to prevent repeated executions
 	let regexMatch;
+	let simplifyResults = simplifyRolls(msg);
 
 	// handle dice roll
 	regexMatch = msg.content.match(DICE_ROLL_REGEX);
 	if (regexMatch) {
 		// Add in a roll 3d10 style roller (with multi support "roll 3d4, 2d6")
 		const playerDice = regexToDice(regexMatch);
-		return msg.reply(rollVampire(playerDice));
+		return msg.reply(rollVampire(playerDice, simplifyResults));
 	}
 
 	// handle player asked to rouse the blood.

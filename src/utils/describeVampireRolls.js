@@ -1,7 +1,10 @@
+import vampireSuccessCount from './vampireSuccessCount.js';
+
+
 /**
  * Produces a description of vampire roll results
  */
-export default function describeVampireRolls([cleanResults, hungryResults]) {
+export default function describeVampireRolls([cleanResults, hungryResults], simplify) {
 	// prevent unecessary work if nothing was rolled
 	if (cleanResults.length + hungryResults.length === 0) return 'please be sensible.';
 
@@ -21,13 +24,25 @@ export default function describeVampireRolls([cleanResults, hungryResults]) {
 			} else if (die === 10) {
 				die = process.env.CLEAN_CRIT;
 			} else if (die > 5) {
-				die = `**${die}**`;
+				if (simplify) {
+					die = process.env.CLEAN_SUCCESS;
+				} else {
+					die = `**${die}**`;
+				};
+			} else {
+				if (simplify) {
+					die = process.env.CLEAN_BLANK;
+				};
 			};
-			cleanArray.push(die)
+			cleanArray.push(die);
 
 		};
-		cleanString = `\nClean Dice: ${cleanArray.join(', ')}`
-	}
+		if (simplify) {
+			cleanString = `\nClean Dice: ${cleanArray.join('')}`
+		} else {
+			cleanString = `\nClean Dice: ${cleanArray.join(', ')}`
+		}
+	};
 	//Add hungry result text if there are any hungry dice
 	//if there are clean dice, newline before the Hungry dice
 	if (hungryResults.length) {
@@ -39,13 +54,27 @@ export default function describeVampireRolls([cleanResults, hungryResults]) {
 			} else if (die === 10) {
 				die = process.env.HUNGRY_CRIT;
 			} else if (die > 5) {
-				die = `**${die}**`;
-			}
+				if (simplify) {
+					die = process.env.HUNGRY_SUCCESS
+				} else {
+					die = `**${die}**`;
+				};
+			} else {
+				if (simplify) {
+					die = process.env.CLEAN_BLANK;
+				};
+			};
 			hungryArray.push(die);
-		}
+		};
 
-		hungryString = `\nHungry Dice: ${hungryArray.join(', ')}`
+		if (simplify) {
+			hungryString = `\nHungry Dice: ${hungryArray.join('')}`
+		} else {
+			hungryString = `\nHungry Dice: ${hungryArray.join(', ')}`
+
+		};
 	};
 
-	return cleanString + hungryString;
+	console.log(cleanString + hungryString)
+	return cleanString + hungryString + vampireSuccessCount(cleanResults + hungryResults);
 }

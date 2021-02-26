@@ -9,3 +9,6 @@ client.on("ready", () => {
 	console.log("loged on ok");
 	//the typo is intentional
 });
+
+const DiceRolling = require("./DiceRolling.js")
+DiceRolling(client, Enviroment)

@@ -15,7 +15,7 @@ export default function handleMessage(msg) {
 		case process.env.DICE_ROLLING_CHANNEL:
 			return handleDiceRollingChannelMessage(msg);
 		case process.env.TEST_CHANNEL_ID:
-			// return handleDiceRollingChannelMessage(msg);
+			return handleDiceRollingChannelMessage(msg);
 			return testTextOutput(msg); // Code to be tested.
 		default:
 			return null; // do nothing
