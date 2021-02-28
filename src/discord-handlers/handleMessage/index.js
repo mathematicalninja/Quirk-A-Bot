@@ -3,7 +3,7 @@ import testTextOutput from '../../utils/testTextOutput.js';
 
 /**
  * Discord message handler
- * @param {Object} msg Discord message object
+ * @param {Object} msg Discord message object.
  */
 export default function handleMessage(msg) {
 	// ignore messages from a bot

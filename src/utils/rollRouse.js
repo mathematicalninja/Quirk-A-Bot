@@ -2,7 +2,7 @@ import rollAd10 from './rollAd10.js';
 
 /**
  * Rolls a rouse check
- * @param {number} rouseDice number of dice to be used in rouse check
+ * @param {number} rouseDice number of dice to be used in rouse check.
  * @returns {string} The results of the rouse check, and a brief explination.
  */
 export default function rollRouse(rouseDice) {
@@ -13,8 +13,6 @@ export default function rollRouse(rouseDice) {
 
 	for (let i = 0; i < rouseDice; i++) {
 		// on rolling each die, checks if it's 6+, then the rouse was a success.
-		// ? does it only take one dice being above 5 to succeed? does rolling 1s affect result?
-		// todo dont reuse die variable
 		let die = rollAd10();
 		if (die > 5) {
 			win = true;

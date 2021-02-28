@@ -5,7 +5,8 @@ import describeVampireRolls from './describeVampireRolls.js';
 /**
  * The wrapper function to do the actual rolling
  * @param {Array<number>} playerDice array of numbers from the user
- * @returns {string} Message tooutput
+ * @param {Boolean} simplify should a simplified result be shown.
+ * @returns {string} Message to output.
  */
 export default function rollVampire(playerDice, simplify) {
 	// make sure atleast pool dice were defined
