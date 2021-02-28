@@ -15,9 +15,8 @@ export default function describeVampireRolls([cleanResults, hungryResults], simp
 
 	//Add clean result text if there are any clean dice
 	if (cleanResults.length) {
-
 		// roll number of dice based on dice count
-		for (let i = 0; i < cleanResults.length - 1; i++) {
+		for (let i = 0; i < cleanResults.length; i++) {
 			let die = cleanResults[i];
 			if (die === 1) {
 				die = process.env.CLEAN_FAIL;
@@ -47,7 +46,7 @@ export default function describeVampireRolls([cleanResults, hungryResults], simp
 	//if there are clean dice, newline before the Hungry dice
 	if (hungryResults.length) {
 
-		for (let i = 0; i < hungryResults.length - 1; i++) {
+		for (let i = 0; i < hungryResults.length; i++) {
 			let die = hungryResults[i];
 			if (die === 1) {
 				die = process.env.HUNGRY_FAIL;
@@ -61,7 +60,7 @@ export default function describeVampireRolls([cleanResults, hungryResults], simp
 				};
 			} else {
 				if (simplify) {
-					die = process.env.CLEAN_BLANK;
+					die = process.env.HUNGRY_BLANK;
 				};
 			};
 			hungryArray.push(die);
@@ -75,6 +74,10 @@ export default function describeVampireRolls([cleanResults, hungryResults], simp
 		};
 	};
 
-	console.log(cleanString + hungryString)
-	return cleanString + hungryString + vampireSuccessCount(cleanResults + hungryResults);
+	let explain = ''
+	if (simplify) {
+		explain = vampireSuccessCount(cleanResults, hungryResults)
+	}
+	// console.log(cleanString + hungryString)
+	return cleanString + hungryString + explain;
 }
