@@ -19,5 +19,5 @@ export default function handleMessage(msg) {
 			return testTextOutput(msg); // Code to be tested.
 		default:
 			return null; // do nothing
-	}
-}
+	};
+};

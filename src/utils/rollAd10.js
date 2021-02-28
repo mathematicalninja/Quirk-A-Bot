@@ -4,4 +4,4 @@
  */
 export default function rollAd10() {
 	return 1 + Math.floor(Math.random() * 10);
-}
+};

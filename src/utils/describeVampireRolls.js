@@ -42,10 +42,10 @@ export default function describeVampireRolls([cleanResults, hungryResults], simp
 
 		// Squishes together the result's array into a printable string
 		if (simplify) { // for Future refactoring. Atm. removes "," between emotes
-			cleanString = `\nClean Dice: ${cleanArray.join('')}`
+			cleanString = `\nClean Dice: ${cleanArray.join('')}`;
 		} else {
-			cleanString = `\nClean Dice: ${cleanArray.join(', ')}`
-		}
+			cleanString = `\nClean Dice: ${cleanArray.join(', ')}`;
+		};
 	};
 
 	// Add hungry result text if there are any hungry dice
@@ -59,7 +59,7 @@ export default function describeVampireRolls([cleanResults, hungryResults], simp
 				die = process.env.HUNGRY_CRIT;
 			} else if (die > 5) {
 				if (simplify) { // optionally replaces successes with emotes
-					die = process.env.HUNGRY_SUCCESS
+					die = process.env.HUNGRY_SUCCESS;
 				} else { // bolds emotes
 					die = `**${die}**`;
 				};
@@ -73,17 +73,17 @@ export default function describeVampireRolls([cleanResults, hungryResults], simp
 
 		// Squishes together the result's array into a printable string
 		if (simplify) { // for Future refactoring. Atm. removes "," between emotes
-			hungryString = `\nHungry Dice: ${hungryArray.join('')}`
+			hungryString = `\nHungry Dice: ${hungryArray.join('')}`;
 		} else {
-			hungryString = `\nHungry Dice: ${hungryArray.join(', ')}`
+			hungryString = `\nHungry Dice: ${hungryArray.join(', ')}`;
 
 		};
 	};
 
 	let explain = ''
 	if (simplify) { // The simplified explination (Messy Crit/Bestial Failure and Success count) which is added to the end of the message.
-		explain = vampireSuccessCount(cleanResults, hungryResults)
-	}
+		explain = vampireSuccessCount(cleanResults, hungryResults);
+	};
 
 	//Clean Dice: \Skull, 4, *8*, \Emote
 	//Hungry Dice: \Skull, 2, *7*, \Emote
@@ -91,4 +91,4 @@ export default function describeVampireRolls([cleanResults, hungryResults], simp
 	//\Emote possible messy crit \Emote
 	//\Skull possible bestial failure \Skull
 	return cleanString + hungryString + explain;
-}
+};

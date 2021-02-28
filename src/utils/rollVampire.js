@@ -18,4 +18,4 @@ export default function rollVampire(playerDice, simplify) {
 	const RESULTS = [rollDiceByCount(cleanDiceCount), rollDiceByCount(hungerDiceCount)];
 	const WHAT_TO_WRITE = describeVampireRolls(RESULTS, simplify);
 	return WHAT_TO_WRITE;
-}
+};

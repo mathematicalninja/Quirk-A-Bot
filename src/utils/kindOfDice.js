@@ -8,4 +8,4 @@ export default function kindOfDice([A, B]) {
 	const hungerDice = Math.min(A, B);
 	const cleanDice = pool - hungerDice;
 	return [cleanDice, hungerDice];
-}
+};

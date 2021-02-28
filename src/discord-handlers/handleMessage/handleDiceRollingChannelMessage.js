@@ -24,13 +24,13 @@ export default function handleDiceRollingChannelMessage(msg) {
 		// Add in a roll 3d10 style roller (with multi support "roll 3d4, 2d6")
 		const playerDice = regexToDice(regexMatch);
 		return msg.reply(rollVampire(playerDice, simplifyResults));
-	}
+	};
 
 	// handle player asked to rouse the blood.
 	regexMatch = msg.content.match(ROUSE_REGEX);
 	if (regexMatch) {
 		const rouseDice = parseInt(regexMatch[1]) || 1;
 		return msg.reply(rollRouse(rouseDice));
-	}
+	};
 
-}
+};

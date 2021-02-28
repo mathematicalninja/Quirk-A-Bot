@@ -5,4 +5,4 @@
  */
 export default function regexToDice(RegexMatch) {
 	return [parseInt(RegexMatch[1]) || 0, parseInt(RegexMatch[2]) || 0];
-}
+};

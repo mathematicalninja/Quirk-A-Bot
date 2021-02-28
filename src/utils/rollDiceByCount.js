@@ -12,4 +12,4 @@ export default function rollDiceByCount(diceCount) {
 	for (let i = 0; i < diceCount; i++) results.push(rollAd10());
 
 	return results;
-}
+};
