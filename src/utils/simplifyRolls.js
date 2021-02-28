@@ -11,6 +11,10 @@ export default function(message) {
 		if (message.mentions.users.get(Bot_id).id == Bot_id) return true;
 	}
 
+	let simplifyRegex = new RegExp("(easy|simp)")
+	if (message.content.match(simplifyRegex)) {
+		return true;
+	};
 
 	return false;
 
