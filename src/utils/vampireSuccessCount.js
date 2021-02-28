@@ -49,11 +49,11 @@ export default function vampireSuccessCount(cleanResults, hungryResults) {
 	}
 	let messyText = ""
 	if (Crits == 1) {
-		messyText = "\nPossible messy critical" + process.env.HUNGRY_CRIT
+		messyText = "\n" + process.env.HUNGRY_CRIT + "Possible messy critical" + process.env.HUNGRY_CRIT
 	};
 	let beastText = ""
 	if (Skulls == 1) {
-		beastText = "\nPossible beastial failure" + process.env.HUNGRY_FAIL
+		beastText = "\n" + process.env.HUNGRY_FAIL + "Possible beastial failure" + process.env.HUNGRY_FAIL
 	}
 	return "\nSuccesses = " + suc + messyText + beastText
 }
