@@ -16,16 +16,11 @@ export default function vampireSuccessCount(cleanResults, hungryResults) {
 			suc += 1
 		}
 		if (res == 1) {
-			console.log(res, Skulls)
-
 			Skulls = 0
-			console.log(res, Skulls)
 		}
 	}
 
-	console.log("red")
 	for (let res of hungryResults) {
-		console.log(res)
 		if (res == 10) {
 			tens += 1
 			if (Crits == 0) {
@@ -36,7 +31,6 @@ export default function vampireSuccessCount(cleanResults, hungryResults) {
 			suc += 1
 		}
 		if (res == 1) {
-			console.log("red", res, Skulls)
 			if (Skulls == 0) {
 				Skulls = 1
 			}
