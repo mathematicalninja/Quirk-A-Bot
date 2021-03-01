@@ -1,25 +1,24 @@
 {
 	"name": "quirk-a-bot",
+	"private": true,
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
-	"module": "src/main.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node .",
-		"dev": "nodemon ."
+		"start": "yarn --cwd packages/discord-bot start",
+		"dev-bot": "yarn --cwd packages/discord-bot start dev",
+		"dev-client": "yarn --cwd packages/character-sheet-client start",
+		"build-client": "yarn --cwd packages/character-sheet-client build"
 	},
 	"author": "",
 	"license": "ISC",
-	"dependencies": {
-		"discord.js": "^12.5.1",
-		"dotenv": "^8.2.0",
-		"esm": "^3.2.25"
-	},
+	"dependencies": {},
 	"devDependencies": {
 		"eslint": "^7.20.0",
 		"eslint-config-airbnb-base": "^14.2.1",
-		"eslint-plugin-import": "^2.22.1",
-		"nodemon": "^2.0.7"
-	}
+		"eslint-plugin-import": "^2.22.1"
+	},
+	"workspaces": [
+		"packages/*"
+	]
 }
